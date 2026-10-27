@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Keezhmad Grama Panchayat geographical information and resource mapping project.">
+  <title>Keezhmad Grama Panchayat | Resource Mapping</title>
+
+  <style>
+    :root {
+      --green: #145c43;
+      --dark: #103d32;
+      --light: #eaf4ed;
+      --gold: #e8b84b;
+      --text: #25352e;
+      --muted: #607169;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f8f6;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
+
+    .topbar {
+      background: var(--dark);
+      color: white;
+      padding: 8px 0;
+      font-size: 13px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .main-header {
+      background: white;
+      padding: 20px 0;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .gov-logo {
+      width: 85px;
+      height: 95px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      font-size: clamp(23px, 3vw, 35px);
+      color: var(--green);
+      line-height: 1.3;
+    }
+
+    .header-text p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .header-text .subtitle {
+      color: #956a17;
+      font-weight: 600;
+    }
+
+    nav {
+      background: var(--green);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px #00000018;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      padding: 14px 19px;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: #237c5c;
+    }
+
+    .hero {
+      min-height: 490px;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(7, 45, 32, 0.92),
+          rgba(7, 45, 32, 0.40)
+        ),
+        url("Keezhmad PANCHAYATH.jpg")
+        center center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+
+    .hero-content {
+      padding: 75px 0;
+      max-width: 780px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--gold);
+      color: #26351d;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      font-size: clamp(32px, 5vw, 53px);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      max-width: 680px;
+      color: #f0f6f1;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #233524;
+      padding: 12px 25px;
+      border-radius: 7px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #f6cf76;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-heading h2 {
+      color: var(--green);
+      font-size: clamp(25px, 3vw, 34px);
+      margin-bottom: 9px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 720px;
+      margin: auto;
+    }
+
+    .heading-line {
+      height: 4px;
+      width: 75px;
+      background: var(--gold);
+      border-radius: 4px;
+      margin: 14px auto 0;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .content-text p {
+      text-align: justify;
+      margin-bottom: 18px;
+      font-size: 16px;
+    }
+
+    .image-frame {
+      background: white;
+      border-radius: 13px;
+      padding: 12px;
+      box-shadow: 0 8px 30px #00000012;
+    }
+
+    .building-img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 8px;
+    }
+
+    figcaption {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 12px 5px 4px;
+    }
+
+    .soft-background {
+      background: var(--light);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 27px;
+      border-top: 4px solid var(--green);
+      box-shadow: 0 5px 20px #00000009;
+    }
+
+    .info-card h3 {
+      color: var(--green);
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .info-card p {
+      font-size: 15px;
+      color: #475a50;
+    }
+
+    .boundary-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .boundary-image {
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .feature-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #d9e5dc;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .map-intro {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto 28px;
+    }
+
+    .map-wrapper {
+      background: white;
+      border-radius: 13px;
+      padding: 12px;
+      box-shadow: 0 7px 25px #00000014;
+      overflow: hidden;
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 580px;
+      border: 0;
+      border-radius: 8px;
+      display: block;
+      background: #e7eee8;
+    }
+
+    .map-action {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .map-action p {
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px #0000000c;
+    }
+
+    .contact-card h3 {
+      color: var(--green);
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    .contact-item {
+      margin-bottom: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-item strong {
+      display: block;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .contact-item a {
+      color: #176b50;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-note {
+      background: var(--light);
+      padding: 22px;
+      border-radius: 9px;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 38px 0 20px;
+      text-align: center;
+    }
+
+    footer h3 {
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      color: #cbded4;
+      font-size: 14px;
+      margin-bottom: 9px;
+    }
+
+    .footer-links {
+      margin: 18px 0;
+    }
+
+    .footer-links a {
+      margin: 0 10px;
+      color: #e9c773;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #ffffff30;
+      padding-top: 18px;
+      margin-top: 25px;
+      font-size: 12px;
+      color: #cbded4;
+    }
+
+    @media (max-width: 850px) {
+      .two-column,
+      .boundary-layout,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        min-height: 420px;
+      }
+
+      .building-img {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .gov-logo {
+        width: 72px;
+        height: 80px;
+      }
+
+      .header-text h1 {
+        font-size: 25px;
+      }
+
+      nav a {
+        padding: 11px 10px;
+        font-size: 12px;
+      }
+
+      .hero {
+        min-height: 420px;
+        background-position: center;
+      }
+
+      .hero-content {
+        padding: 55px 0;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      section {
+        padding: 50px 0;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .building-img {
+        height: 250px;
+      }
+
+      .map-wrapper iframe {
+        height: 450px;
+      }
+
+      .contact-card {
+        padding: 24px;
+      }
+
+      .footer-links a {
+        display: inline-block;
+        margin: 6px 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- GOVERNMENT HEADER -->
+  <div class="topbar">
+    KEEZHMAD GRAMA PANCHAYAT | GEOGRAPHICAL INFORMATION PORTAL
+  </div>
+
+  <header class="main-header">
+    <div class="container header-content">
+
+      <img
+        src="Government of Kerala.jpg"
+        alt="Government of Kerala Emblem"
+        class="gov-logo"
+      >
+
+      <div class="header-text">
+        <h1>KEEZHMAD GRAMA PANCHAYAT</h1>
+        <p class="subtitle">കീഴ്മാട് ഗ്രാമപഞ്ചായത്ത്</p>
+        <p>Ernakulam District | Kerala, India</p>
+        <p>Geographical Information & Resource Mapping Project</p>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav aria-label="Main navigation">
+    <div class="container nav-content">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#profile">Profile</a>
+      <a href="#boundary">Boundary</a>
+      <a href="#resources">Resource Map</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HOME / HERO -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+
+          <span class="hero-tag">
+            LOCAL GEOGRAPHICAL INFORMATION
+          </span>
+
+          <h2>
+            Welcome to<br>
+            Keezhmad Grama Panchayat
+          </h2>
+
+          <p>
+            Explore the geographical characteristics,
+            administrative boundary, local resources,
+            and spatial information of Keezhmad Grama
+            Panchayat through an integrated digital
+            information and resource mapping platform.
+          </p>
+
+          <a href="#resources" class="btn">
+            Explore Resource Map
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>About Keezhmad Grama Panchayat</h2>
+          <p>
+            An introduction to the local administrative
+            and geographical setting
+          </p>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="two-column">
+
+          <div class="content-text">
+
+            <p>
+              Keezhmad Grama Panchayat is a local
+              self-government institution situated in
+              Ernakulam district of Kerala, India.
+              Located within the Aluva region, the
+              Panchayat forms part of Kerala's
+              decentralised system of rural
+              administration and local development.
+            </p>
+
+            <p>
+              The Panchayat plays an important role
+              in supporting community development,
+              local infrastructure, public services,
+              environmental management, and the
+              planning of basic facilities for
+              residents. Local self-government
+              institutions provide an important
+              connection between government
+              programmes and the needs of
+              individual communities.
+            </p>
+
+            <p>
+              From a geographical perspective,
+              understanding the distribution of
+              settlements, transport networks,
+              land use, water resources, and
+              public facilities is essential
+              for effective spatial planning.
+              Digital mapping and Geographic
+              Information Systems (GIS) can
+              support this process by presenting
+              information in an accessible
+              and organised format.
+            </p>
+
+          </div>
+
+          <figure class="image-frame">
+            <img
+              src="Keezhmad PANCHAYATH.jpg"
+              alt="Keezhmad Grama Panchayat building"
+              class="building-img"
+              loading="lazy"
+            >
+            <figcaption>
+              Keezhmad Grama Panchayat Building
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PANCHAYAT PROFILE -->
+    <section id="profile" class="soft-background">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Panchayat Geographical Profile</h2>
+          <p>
+            Administrative, environmental, and
+            spatial characteristics
+          </p>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="info-grid">
+
+          <article class="info-card">
+            <h3>Administrative Location</h3>
+            <p>
+              Keezhmad Grama Panchayat is located
+              in Ernakulam district, Kerala,
+              within the Aluva region. It is
+              part of the rural local
+              self-government system.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Physical Environment</h3>
+            <p>
+              The geographical environment
+              includes settlements, vegetation,
+              local drainage systems, and
+              land-use patterns that influence
+              environmental planning.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Land Use</h3>
+            <p>
+              Land-use mapping helps identify
+              residential areas, agricultural
+              spaces, roads, vegetation, and
+              other categories relevant to
+              local planning.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Transportation</h3>
+            <p>
+              Road networks connect settlements
+              and public facilities. Mapping
+              transportation infrastructure
+              helps examine accessibility
+              and spatial connectivity.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Public Facilities</h3>
+            <p>
+              Educational institutions,
+              healthcare services, government
+              offices, and community facilities
+              are important elements of
+              local resource mapping.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>GIS Applications</h3>
+            <p>
+              Geographic Information Systems
+              support the visualisation and
+              analysis of administrative
+              boundaries, infrastructure,
+              environmental resources,
+              and spatial relationships.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PANCHAYAT BOUNDARY -->
+    <section id="boundary">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Administrative Boundary Map</h2>
+          <p>
+            Spatial representation of the
+            Keezhmad Grama Panchayat boundary
+          </p>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="boundary-layout">
+
+          <figure class="image-frame">
+            <img
+              src="BOUNDARY.png"
+              alt="Boundary map of Keezhmad Grama Panchayat"
+              class="boundary-image"
+              loading="lazy"
+            >
+            <figcaption>
+              Keezhmad Grama Panchayat -
+              Administrative Boundary
+            </figcaption>
+          </figure>
+
+          <div class="content-text">
+
+            <p>
+              The administrative boundary map
+              provides a spatial representation
+              of Keezhmad Grama Panchayat.
+              Administrative boundaries are
+              fundamental geographical
+              reference layers used in
+              local-level planning, mapping,
+              and resource assessment.
+            </p>
+
+            <p>
+              Boundary information helps
+              identify the geographical
+              extent of the study area
+              and provides a framework
+              for examining settlement
+              patterns, infrastructure,
+              land-use distribution,
+              and environmental features.
+            </p>
+
+            <p>
+              When combined with other
+              geographical datasets,
+              boundary maps support
+              spatial analysis and
+              the preparation of
+              thematic maps using GIS.
+            </p>
+
+            <ul class="feature-list">
+              <li>Administrative area identification</li>
+              <li>Spatial planning and mapping</li>
+              <li>Land-use and resource assessment</li>
+              <li>Infrastructure distribution analysis</li>
+              <li>GIS-based geographical studies</li>
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCE MAPPING -->
+    <section id="resources" class="soft-background">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Interactive Resource Map</h2>
+          <p>
+            Digital GIS-based resource
+            information platform
+          </p>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="map-intro">
+          <p>
+            Resource mapping is an important
+            component of geographical analysis
+            and local development planning.
+            It provides a systematic approach
+            to identifying, organising, and
+            visualising the spatial distribution
+            of natural, social, and
+            infrastructural resources.
+          </p>
+
+          <p>
+            The interactive resource map below
+            provides access to the existing
+            Keezhmad Panchayat mapping project.
+            Explore the available spatial
+            information using the map's
+            navigation and interactive tools.
+          </p>
+        </div>
+
+        <div class="map-wrapper">
+          <iframe
+            src="https://rafeeksajeenarafeek-byte.github.io/PANCHAYATH/"
+            title="Keezhmad Panchayat Interactive Resource Map"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
+
+        <div class="map-action">
+          <p>
+            For a larger map view, open
+            the resource mapping portal
+            in a separate browser tab.
+          </p>
+
+          <a
+            href="https://rafeeksajeenarafeek-byte.github.io/PANCHAYATH/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn">
+            Open Full Resource Map ↗
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GEOGRAPHICAL SIGNIFICANCE -->
+    <section id="significance">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Importance of Resource Mapping</h2>
+          <p>
+            Supporting geographical understanding
+            and evidence-based local planning
+          </p>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="content-text">
+
+          <p>
+            Resource mapping provides a
+            geographical framework for
+            understanding the relationship
+            between people, infrastructure,
+            and the physical environment.
+            By representing different
+            features spatially, it becomes
+            possible to examine the
+            distribution of resources
+            and identify areas requiring
+            additional planning attention.
+          </p>
+
+          <p>
+            GIS-based mapping can support
+            the assessment of public service
+            accessibility, transportation
+            connectivity, land-use patterns,
+            and environmental conditions.
+            These applications are especially
+            relevant at the Panchayat level,
+            where development decisions
+            directly influence local
+            communities.
+          </p>
+
+          <p>
+            This website serves as an
+            educational and geographical
+            information platform, bringing
+            together descriptive information,
+            boundary mapping, and interactive
+            spatial resources in a single
+            digital interface.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="soft-background">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Contact & Project Information</h2>
+          <p>
+            Geographical information and
+            resource mapping project
+          </p>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="contact-layout">
+
+          <div class="contact-card">
+
+            <h3>Project Contact</h3>
+
+            <div class="contact-item">
+              <strong>Contact Person</strong>
+              <span>Risvana S R</span>
+            </div>
+
+          
+            <div class="contact-item">
+              <strong>Email Address</strong>
+              <a href="mailto:rafeeksajeenarafeek@gmail.com">
+                rafeeksajeenarafeek@gmail.com
+              </a>
+            </div>
+
+            <div class="contact-item">
+              <strong>Project Location</strong>
+              <span>
+                Keezhmad Grama Panchayat<br>
+                Aluva Region<br>
+                Ernakulam District<br>
+                Kerala, India
+              </span>
+            </div>
+
+          </div>
+
+          <div class="contact-card">
+
+            <h3>About This Digital Project</h3>
+
+            <p>
+              The Keezhmad Grama Panchayat
+              geographical information website
+              is designed to present local
+              spatial information through
+              a clear and accessible
+              digital platform.
+            </p>
+
+            <p style="margin-top: 15px;">
+              The project integrates an
+              administrative boundary map,
+              descriptive geographical
+              information, and an existing
+              interactive resource mapping
+              application.
+            </p>
+
+            <div class="contact-note">
+              <strong>Important Notice</strong>
+              <p>
+                This is an independent
+                educational and GIS resource
+                mapping project. It is not
+                the official government
+                website of Keezhmad Grama
+                Panchayat. The contact
+                details provided are for
+                the project, not the
+                Panchayat office.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+
+      <h3>Keezhmad Grama Panchayat</h3>
+
+      <p>
+        Geographical Information &
+        Resource Mapping Project
+      </p>
+
+      <p>
+        Ernakulam District, Kerala, India
+      </p>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#boundary">Boundary</a>
+        <a href="#resources">Resource Map</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © <span id="year"></span>
+          Keezhmad Geographical Information Project.
+        </p>
+        <p>
+          Developed by Risvana S R |
+          GIS & Resource Mapping
+        </p>
+        <p>
+          Independent educational project -
+          Not an official Government of Kerala website.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Automatically update copyright year.
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
